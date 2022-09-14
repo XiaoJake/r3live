@@ -74,7 +74,7 @@ include_directories(
   ./src
   ./src/loam/include
   ./src/tools/
-  ./src/rgb_map 
+  ./src/rgb_map
   ./src/meshing
 )
 
@@ -89,7 +89,7 @@ message(STATUS "===== OpenCV include path: ${OpenCV_INCLUDE_DIRS} =====")
 add_executable(r3live_LiDAR_front_end src/loam/LiDAR_front_end.cpp)
 target_link_libraries(r3live_LiDAR_front_end ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 if(Ceres_FOUND)
-  message(STATUS "===== Find ceres, Version ${Ceres_VERSION} =====")  
+  message(STATUS "===== Find ceres, Version ${Ceres_VERSION} =====")
   include_directories(${CERES_INCLUDE_DIRS})
   add_executable(r3live_cam_cali src/r3live_cam_cali.cpp)
   target_link_libraries(r3live_cam_cali ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} ${CERES_LIBRARIES})
@@ -99,10 +99,10 @@ if(Ceres_FOUND)
 endif()
 add_executable(test_timer src/tools/test_timer.cpp)
 
-add_executable(r3live_mapping src/r3live.cpp 
+add_executable(r3live_mapping src/r3live.cpp
                 src/r3live_lio.cpp
                 src/loam/include/kd_tree/ikd_Tree.cpp
-                src/loam/include/FOV_Checker/FOV_Checker.cpp 
+                src/loam/include/FOV_Checker/FOV_Checker.cpp
                 src/loam/IMU_Processing.cpp
                 src/rgb_map/offline_map_recorder.cpp
                 # From VIO
@@ -112,15 +112,15 @@ add_executable(r3live_mapping src/r3live.cpp
                 src/rgb_map/image_frame.cpp
                 src/rgb_map/pointcloud_rgbd.cpp
               )
-target_link_libraries(r3live_mapping 
+target_link_libraries(r3live_mapping
                           ${catkin_LIBRARIES}
                           ${Boost_LIBRARIES}
                           ${Boost_FILESYSTEM_LIBRARY}
                           ${Boost_SERIALIZATION_LIBRARY} # serialization
                           ${OpenCV_LIBRARIES}
                           # ${OpenMVS_LIBRARIES}
-                          pcl_common 
-                          pcl_io) 
+                          pcl_common
+                          pcl_io)
 
 FIND_PACKAGE(CGAL REQUIRED)
 if(CGAL_FOUND)
@@ -131,16 +131,16 @@ if(CGAL_FOUND)
   SET(_USE_BOOST TRUE)
   SET(_USE_OPENMP TRUE)
   SET(_USE_EIGEN TRUE)
-  add_executable(r3live_meshing src/r3live_reconstruct_mesh.cpp                              
+  add_executable(r3live_meshing src/r3live_reconstruct_mesh.cpp
                                 src/rgb_map/image_frame.cpp
-                                src/rgb_map/pointcloud_rgbd.cpp  
+                                src/rgb_map/pointcloud_rgbd.cpp
                                 # Common
                                 src/meshing/MVS/Common/Common.cpp
                                 src/meshing/MVS/Common/Log.cpp
                                 src/meshing/MVS/Common/Timer.cpp
                                 src/meshing/MVS/Common/Types.cpp
                                 src/meshing/MVS/Common/Util.cpp
-                                # MVS                       
+                                # MVS
                                 src/meshing/MVS/Mesh.cpp
                                 src/meshing/MVS/PointCloud.cpp
                                 src/meshing/MVS/Camera.cpp
@@ -149,16 +149,16 @@ if(CGAL_FOUND)
                                 src/meshing/MVS/OBJ.cpp
                                 src/meshing/MVS/IBFS.cpp
                                 )
-target_link_libraries(r3live_meshing 
+target_link_libraries(r3live_meshing
                                   ${catkin_LIBRARIES}
                                   ${Boost_LIBRARIES}
                                   ${Boost_FILESYSTEM_LIBRARY}
                                   ${Boost_SERIALIZATION_LIBRARY} # serialization
                                   ${CGAL_LIBS}
                                   ${OpenCV_LIBRARIES}
-                                  ${JPEG_LIBRARIES} 
+                                  ${JPEG_LIBRARIES}
                                   gmp
-                                  pcl_common 
+                                  pcl_common
                                   pcl_io
                                   pcl_kdtree)
 
